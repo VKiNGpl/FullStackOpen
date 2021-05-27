@@ -1,0 +1,8 @@
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: JSON-response ({"message":"note created"}) (201-created)
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: spa.js (200-success)
+
+note over browser:
+browser starts executing js-code
+end note
