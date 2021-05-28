@@ -10,3 +10,9 @@ export const Hello = ({ name, age }) => {
     </div>
   );
 };
+
+export const Display = ({ counter }) => <p>{counter}</p>;
+
+export const Button = ({ handleClick, text}) => (
+  <button onClick={handleClick}>{text}</button>
+);

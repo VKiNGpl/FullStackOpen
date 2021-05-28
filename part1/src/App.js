@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import { Hello } from './Hello.js';
-
-const Display = ({ counter }) => <p>{counter}</p>;
-
-const Button = ({ handleClick, text}) => (
-  <button onClick={handleClick}>{text}</button>
-);
+import { Hello, Display, Button } from './Helpers.js';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
