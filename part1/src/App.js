@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
-import { Hello, Display, Button } from './Helpers.js';
+import { History, Button } from './Helpers'
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
+  const [left, setLeft] = useState(0);
+  const [right, setRight] = useState(0);
+  const [allClicks, setAll] = useState([]);
 
-  const increaseByOne = () => setCounter(counter + 1);
-  const decreaseByOne = () => setCounter(counter - 1);
-  const setToZero = () => setCounter(0);
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'));
+    setLeft(left + 1);
+  };
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1);
+  };
 
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello name='Maya' age={26 + 10} />
-      <Display counter={counter} />
-      <Button text='plus' handleClick={increaseByOne} />
-      <Button text='minus' handleClick={decreaseByOne} />
-      <Button text='zero' handleClick={setToZero} />
+      {left}
+      <Button text='left' handleClick={handleLeftClick} />
+      <Button text='right' handleClick={handleRightClick} />
+      {right}
+      <History allClicks={allClicks} />
     </div>
   );
 };
