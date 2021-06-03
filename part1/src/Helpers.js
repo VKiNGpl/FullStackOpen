@@ -11,7 +11,7 @@ export const Hello = ({ name, age }) => {
   );
 };
 
-export const Display = ({ counter }) => <p>{counter}</p>;
+export const Display = props => <div>{props.value}</div>
 
 export const Button = ({ handleClick, text}) => (
   <button onClick={handleClick}>{text}</button>
