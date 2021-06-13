@@ -1,64 +1,39 @@
 import React, { useState } from 'react';
-import { Display, Header2, Button } from './Helpers';
+import { Header2, Button } from './Helpers';
+import { Statistics } from './Statistics';
 
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  const [all, setAll] = useState(0);
-  const [average, setAverage] = useState(0);
-  const [positive, setPositive] = useState(0);
 
-  const updateGood = () => {
-    const updatedGood = good + 1;
-    const voteRatio = updatedGood - bad;
-    const updatedAll = updatedGood + neutral + bad;
-    const updatedAverage = voteRatio / updatedAll;
-    const updatedPositive = (updatedGood / updatedAll) * 100;
+  const updateVotes = (event) => {
+    const innerText = event.target.innerText;
 
-    setGood(updatedGood);
-    setAll(updatedAll);
-    setAverage(updatedAverage);
-    setPositive(updatedPositive);
-  };
-
-  const updateNeutral = () => {
-    const updatedNeutral = neutral + 1;
-    const updatedAll = good + updatedNeutral + bad;
-    const updatedPositive = (good / updatedAll) * 100;
-
-    setNeutral(updatedNeutral);
-    setAll(updatedAll);
-    setPositive(updatedPositive);
-  };
-  
-  const updateBad = () => {
-    const updatedBad = bad + 1;
-    const voteRatio = good - updatedBad;
-    const updatedAll = good + neutral + updatedBad;
-    const updatedAverage = voteRatio / updatedAll;
-    const updatedPositive = (good / updatedAll) * 100;
-
-    setBad(updatedBad);
-    setAll(updatedAll);
-    setAverage(updatedAverage);
-    setPositive(updatedPositive);
+    switch (innerText) {
+      case 'good':
+        setGood(good + 1);
+        break;
+      case 'neutral':
+        setNeutral(neutral + 1);
+        break;
+      case 'bad':
+        setBad(bad + 1);
+        break;
+      default:
+        console.log(`Unrecognized innerText: ${innerText}`);
+    }
   };
 
   return (
     <div>
       <Header2 text='give feedback' />
-      <Button onClick={updateGood} text='good' />
-      <Button onClick={updateNeutral} text='neutral' />
-      <Button onClick={updateBad} text='bad' />
+      <Button onClick={updateVotes} text='good' />
+      <Button onClick={updateVotes} text='neutral' />
+      <Button onClick={updateVotes} text='bad' />
       <Header2 text='statistics' />
-      <Display value={`good ${good}`} />
-      <Display value={`neutral ${neutral}`} />
-      <Display value={`bad ${bad}`} />
-      <Display value={`all ${all}`} />
-      <Display value={`average ${average}`} />
-      <Display value={`positive ${positive} %`} />
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   );
 };
