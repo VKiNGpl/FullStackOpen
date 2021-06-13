@@ -8,6 +8,12 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  const feedback = {
+    good,
+    neutral,
+    bad
+  }
+
   const updateVotes = (event) => {
     const innerText = event.target.innerText;
 
@@ -33,7 +39,7 @@ const App = () => {
       <Button onClick={updateVotes} text='neutral' />
       <Button onClick={updateVotes} text='bad' />
       <Header2 text='statistics' />
-      <Statistics good={good} neutral={neutral} bad={bad} />
+      <Statistics feedback={feedback} />
     </div>
   );
 };

@@ -1,25 +1,25 @@
-import { Display } from './Helpers';
+import { Statistic } from './Helpers';
 
-export const Statistics = ({ good, neutral, bad }) => {
-  const all = good + neutral + bad;
-  const voteRatio = good - bad;
+export const Statistics = ({ feedback }) => {
+  const all = feedback.good + feedback.neutral + feedback.bad;
+  const voteRatio = feedback.good - feedback.bad;
   const average = all ? voteRatio / all : 0;
-  const positive = all ? (good / all) * 100 : 0;
+  const positive = all ? (feedback.good / all) * 100 : 0;
 
-  return (
-    <div>
-      {all ? (
-        <div>
-          <Display value={`good ${good}`} />
-          <Display value={`neutral ${neutral}`} />
-          <Display value={`bad ${bad}`} />
-          <Display value={`all ${all}`} />
-          <Display value={`average ${average}`} />
-          <Display value={`positive ${positive} %`} />
-        </div>
-      ) : (
-        <Display value='No feedback given' />
-      )}
-    </div>
-  );
+  if (all) {
+    return (
+      <table>
+        <tbody>
+          <Statistic text='good' value={feedback.good} />
+          <Statistic text='neutral' value={feedback.neutral} />
+          <Statistic text='bad' value={feedback.bad} />
+          <Statistic text='all' value={all} />
+          <Statistic text='average' value={average} />
+          <Statistic text='positive' value={`${positive} %`} />
+        </tbody>
+      </table>
+    );
+  }
+
+  return 'No feedback given';
 };

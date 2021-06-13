@@ -1,11 +1,17 @@
-export const Display = (props) => <div>{props.value}</div>;
+export const Display = ({ value }) => <>{value}</>;
 
-export const Header2 = (props) => {
-  // console.log(props)
+export const Statistic = ({ text, value }) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+);
+
+export const Header2 = ({ text }) => {
   return (
-    <div>
-      <h2>{props.text}</h2>
-    </div>
+    <h2>
+      {text}
+    </h2>
   );
 };
 
