@@ -1,4 +1,9 @@
-import { Statistic } from './Helpers';
+export const Statistic = ({ text, value }) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+);
 
 export const Statistics = ({ feedback }) => {
   const all = feedback.good + feedback.neutral + feedback.bad;
