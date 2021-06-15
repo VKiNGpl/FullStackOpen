@@ -43,7 +43,12 @@ const App = () => {
         <Button onClick={getNewAnecdote} text={'next anecdote'} />
       </div>
       <Header2 text='Anecdote with most votes' />
-      <Display value={anecdotes[mostVotes]} />
+      <div>
+        <Display value={anecdotes[mostVotes]} />
+      </div>
+      <div>
+        <Display value={`has ${votes[mostVotes]} votes`} />
+      </div>
     </div>
   );
 };
