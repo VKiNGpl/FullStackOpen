@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from './Helpers';
+import { Button, Display } from './Helpers';
 
 const App = () => {
   const anecdotes = [
@@ -13,17 +13,31 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
 
   const getNewAnecdote = () => {
     const random = Math.floor(Math.random() * anecdotes.length);
-
+    
     setSelected(random)
+  };
+  
+  const addVote = () => {
+    const updatedVotes = [...votes];
+    updatedVotes[selected] += 1;
+    
+    setVotes(updatedVotes)
   };
 
   return (
     <div>
-      {anecdotes[selected]}
       <div>
+        <Display value={anecdotes[selected]} />
+      </div>
+      <div>
+        <Display value={`has ${votes[selected]} votes`} />
+      </div>
+      <div>
+        <Button onClick={addVote} text={'vote'} />
         <Button onClick={getNewAnecdote} text={'next anecdote'} />
       </div>
     </div>
