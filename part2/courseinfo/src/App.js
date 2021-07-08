@@ -27,25 +27,16 @@ const Content = (props) => {
       <Part part={props.parts[1]} />
       <Part part={props.parts[2]} />
       <Part part={props.parts[3]} />
-      <Part part={props.parts[4]} />
-      <Part part={props.parts[5]} />
     </div>
   );
 };
 
 const Total = (props) => {
-  // console.log(props)
-  const total =
-    props.parts[0].exercises +
-    props.parts[1].exercises +
-    props.parts[2].exercises +
-    props.parts[3].exercises +
-    props.parts[4].exercises +
-    props.parts[5].exercises;
+  const total = props.parts.reduce((acc, value) => acc + value.exercises, 0);
 
   return (
     <div>
-      <p>Number of exercises {total}</p>
+      <p>total of {total} exercises</p>
     </div>
   );
 };
@@ -77,16 +68,8 @@ const App = () => {
         exercises: 14,
       },
       {
-        name: 'State of a 3',
-        exercises: 3,
-      },
-      {
-        name: 'State of a 4',
-        exercises: 4,
-      },
-      {
-        name: 'State of a 5',
-        exercises: 5,
+        name: 'Redux',
+        exercises: 11,
       },
     ],
   };
