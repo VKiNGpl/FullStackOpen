@@ -2,6 +2,7 @@ import React from 'react';
 import { Note } from './components/Note';
 
 const App = ({ notes }) => {
+  // console.log(notes);
   return (
     <div>
       <h1>Notes</h1>
