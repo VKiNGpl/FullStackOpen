@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { Header2 } from './components/Helpers';
+import { Filter } from './components/Filter';
+import { PersonForm } from './components/PersonForm';
+import { Persons } from './components/Persons';
 
 const App = () => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
-    { name: 'Ada Lovelace', number: '39-44-5323523' },
-    { name: 'Dan Abramov', number: '12-43-234345' },
-    { name: 'Mary Poppendieck', number: '39-23-6423122' },
   ]);
   const [filter, setFilter] = useState('');
   const [filteredNames, setFilteredNames] = useState(persons);
@@ -18,6 +19,9 @@ const App = () => {
 
     if (names.indexOf(newName) >= 0) {
       window.alert(`${newName} already exists in phonebook!`);
+      return;
+    } else if (!newName) {
+      window.alert(`"name" cannot be blank!`);
       return;
     }
 
@@ -34,7 +38,7 @@ const App = () => {
     setNewNumber('');
   };
 
-  const filterNames = ({ target }) => {
+  const handleFilterNames = ({ target }) => {
     const value = target.value;
     setFilter(value);
 
@@ -45,40 +49,27 @@ const App = () => {
     setFilteredNames(names);
   };
 
-  const handleNewName = (event) => {
-    setNewName(event.target.value);
+  const handleNewName = ({ target }) => {
+    setNewName(target.value);
   };
 
-  const handleNewNumber = (event) => {
-    setNewNumber(event.target.value);
+  const handleNewNumber = ({ target }) => {
+    setNewNumber(target.value);
   };
 
   return (
     <div>
-      <h2>Phonebook</h2>
-      <div>
-        filter shown with <input value={filter} onChange={filterNames} />
-      </div>
-      <form onSubmit={addPerson}>
-        <h2>add a new</h2>
-        <div>
-          name: <input value={newName} onChange={handleNewName} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNewNumber} />
-        </div>
-        <div>
-          <button type='submit'>add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <div>
-        {filteredNames.map((person) => (
-          <div key={person.name}>
-            {person.name} {person.number}
-          </div>
-        ))}
-      </div>
+      <Header2 text='Phonebook' />
+      <Filter value={filter} handler={handleFilterNames}/>
+      <PersonForm 
+        submitHandler={addPerson} 
+        name={newName}
+        nameHandler={handleNewName}
+        number={newNumber}
+        numberHandler={handleNewNumber}
+      />
+      <Header2 text='Numbers' />
+      <Persons names={filteredNames} />
     </div>
   );
 };
