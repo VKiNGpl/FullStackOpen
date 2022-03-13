@@ -16,6 +16,7 @@ export const Country = ({ countries }) => {
           </ul>
           <img src={country.flags.svg} 
             alt={`Flag of ${country.name.common}`}
+            style={{borderColor: 'black', borderWidth: '1px', borderStyle: 'solid'}} 
           />
         </div>
       ))}
