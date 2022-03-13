@@ -34,9 +34,9 @@ function App() {
       <Filter value={filter} handler={handleFilterNames} />
       {filteredNames.length > 10 ?
         'Too many matches, specify another filter' :
-        filteredNames.length !== 1 ?
-          <Countries countries={filteredNames} /> :
-          <Country countries={filteredNames} />
+        filteredNames.length === 1 ?
+          <Country countries={filteredNames} /> :
+          <Countries countries={filteredNames} />
       }
     </div>
   );
