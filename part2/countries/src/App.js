@@ -10,7 +10,6 @@ function App() {
   const [filter, setFilter] = useState('');
   const [filteredNames, setFilteredNames] = useState(countries);
 
-
   useEffect(() => {
     axios
       .get('https://restcountries.com/v3.1/all')
@@ -24,7 +23,7 @@ function App() {
     setFilter(value);
 
     const filteredCountries = countries.filter((country) => {
-      return country.name.official.toLowerCase().includes(value.toLowerCase());
+      return country.name.common.toLowerCase().includes(value.toLowerCase());
     });
     setFilteredNames(filteredCountries);
   };
@@ -36,7 +35,7 @@ function App() {
         'Too many matches, specify another filter' :
         filteredNames.length === 1 ?
           <Country countries={filteredNames} /> :
-          <Countries countries={filteredNames} />
+          <Countries countries={filteredNames} countrySelector={setFilteredNames} />
       }
     </div>
   );
