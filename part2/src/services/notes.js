@@ -20,10 +20,6 @@ async function update(id, newObject) {
     return response.data;
 }
 
-const exportedObject = {
-    getAll,
-    create,
-    update
-};
+const exportedObject = { getAll, create, update };
 
 export default exportedObject;
