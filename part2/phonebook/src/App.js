@@ -5,19 +5,20 @@ import { PersonForm } from './components/PersonForm';
 import { Persons } from './components/Persons';
 
 import axios from 'axios';
+import personsService from './services/persons'
 
 const App = () => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [persons, setPersons] = useState([]);
   const [filter, setFilter] = useState('');
-  const [filteredNames, setFilteredNames] = useState(persons);
+  const [filteredNames, setFilteredNames] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data);
+    personsService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons);
       });
   }, []);
 
@@ -38,12 +39,16 @@ const App = () => {
       number: newNumber,
     };
 
-    const newNames = persons.concat(newPerson);
-    setPersons(newNames);
-    setFilteredNames(newNames);
-    setFilter('');
-    setNewName('');
-    setNewNumber('');
+    personsService
+      .create(newPerson)
+      .then(returnedPerson => {
+        const newNames = persons.concat(returnedPerson);
+        setPersons(newNames);
+        setFilteredNames(newNames);
+        setFilter('');
+        setNewName('');
+        setNewNumber('');
+      });
   };
 
   const handleFilterNames = ({ target }) => {
